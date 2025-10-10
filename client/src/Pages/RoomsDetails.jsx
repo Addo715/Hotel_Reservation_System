@@ -123,7 +123,7 @@ const RoomsDetails = () => {
         </div>
         <button
           onClick={handleBookNow}
-          className="bg-blue-500 cursor-pointer text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+          className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded hover:bg-blue-700 transition"
         >
           Book Now
         </button>
