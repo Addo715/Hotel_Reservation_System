@@ -8,6 +8,7 @@ import RoomsDetails from './Pages/RoomsDetails';
 import AdminPage from './Pages/Admin/AdminPage';
 import UserSignup from './Pages/UserSignup';
 import AdminSignup from './Pages/Admin/AdminSignup';
+import MyBookings from './Pages/MyBookings';
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/signup" element={<UserSignup />} />
           <Route path='/adminsignup' element={<AdminSignup/>}/>
+          <Route path='/my-bookings' element={<MyBookings/>}/>
         </Routes>
       </main>
 
