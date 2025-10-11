@@ -246,6 +246,8 @@ const AdminSignup = () => {
                 )}
             </div>
 
+ {/* Addo  */}
+ 
             <div
                 className="hidden md:block w-1/2 bg-cover bg-center"
                 style={{
