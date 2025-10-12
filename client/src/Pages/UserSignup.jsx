@@ -51,13 +51,16 @@ const UserSignup = () => {
                     password: formData.password,
                 })
 
-                const { access, user } = res.data
-                localStorage.setItem("token", access)
+                const { access, refresh, user } = res.data
+
+                // ✅ Store tokens and user info
+                localStorage.setItem("access", access)
+                localStorage.setItem("refresh", refresh)
                 localStorage.setItem("user", JSON.stringify(user))
 
                 setMessage("Login successful!")
 
-                // Redirect based on role
+                // ✅ Redirect based on role
                 if (user.isAdmin) {
                     navigate("/admin")
                 } else {
