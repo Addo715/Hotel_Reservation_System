@@ -63,7 +63,7 @@ const Sidebar = ({ currentRoute, setCurrentRoute, sidebarOpen, setSidebarOpen })
               }}
               className={`w-full flex items-center px-4 py-3 rounded-lg transition-all ${
                 currentRoute === item.id
-                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md'
+                  ? 'bg-gradient-to-r from-blue-400 to-blue-500 text-white shadow-md'
                   : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
