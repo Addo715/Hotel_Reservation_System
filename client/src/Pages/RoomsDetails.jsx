@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import { roomsDummyData, facilityIcons } from "../assets/assets";
 
 const RoomsDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const room = roomsDummyData.find((room) => room._id === id);
   const [selectedImage, setSelectedImage] = useState(0);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,9 +28,25 @@ const RoomsDetails = () => {
 
   const handleBookNow = () => {
     if (!checkIn || !checkOut) {
-      alert("Please select both check-in and check-out dates");
+      toast.error("Please select both check-in and check-out dates");
       return;
     }
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (checkInDate < today) {
+      toast.error("Check-in date cannot be in the past");
+      return;
+    }
+
+    if (checkOutDate <= checkInDate) {
+      toast.error("Check-out date must be after check-in date");
+      return;
+    }
+
     const bookingData = {
       roomId: room._id,
       name: room.name,
@@ -40,20 +57,35 @@ const RoomsDetails = () => {
       image: room.images[0],
       checkIn,
       checkOut,
-      total: room.pricePerNight * Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)),
+      total: room.pricePerNight * Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)),
       status: "Unpaid",
+      bookingDate: new Date().toISOString(),
     };
-    navigate("/my-bookings", { state: bookingData });
+
+    const existingBookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+    existingBookings.push(bookingData);
+    localStorage.setItem("bookings", JSON.stringify(existingBookings));
+
+    toast.success("Room added to your bookings!", {
+      duration: 4000, // Changed from 3000 to 4000 for 4 seconds
+      position: "top-center",
+      icon: "✅",
+    });
+
+    // Clear the form
+    setCheckIn("");
+    setCheckOut("");
+
+    // Removed navigate("/my-bookings") to stay on the current page
   };
 
   return (
     <div className="px-4 sm:px-8 md:px-16 lg:px-24 pt-28 pb-20">
-      {/* Room Header */}
+      <Toaster />
       <h1 className="text-3xl font-bold">{room.name}</h1>
       <p className="text-gray-500 text-sm">{room.address}</p>
       <p className="text-gray-500 text-sm">{room.city || "New York"}</p>
 
-      {/* Room Images */}
       <div className="mt-4">
         <div className="w-full">
           <img
@@ -81,7 +113,6 @@ const RoomsDetails = () => {
         </div>
       </div>
 
-      {/* Room Details */}
       <div className="mt-6">
         <p className="text-xl font-semibold">${room.pricePerNight} / night</p>
         <p className="text-gray-600 text-md mt-2">{room.roomType}</p>
@@ -101,7 +132,6 @@ const RoomsDetails = () => {
         </div>
       </div>
 
-      {/* Booking Inputs */}
       <div className="mt-6 flex flex-wrap gap-4 items-end">
         <div>
           <label className="block text-gray-600 text-sm mb-1">Check-in</label>
@@ -109,6 +139,7 @@ const RoomsDetails = () => {
             type="date"
             value={checkIn}
             onChange={(e) => setCheckIn(e.target.value)}
+            min={new Date().toISOString().split("T")[0]}
             className="border border-gray-300 rounded px-3 py-2"
           />
         </div>
@@ -118,6 +149,7 @@ const RoomsDetails = () => {
             type="date"
             value={checkOut}
             onChange={(e) => setCheckOut(e.target.value)}
+            min={checkIn || new Date().toISOString().split("T")[0]}
             className="border border-gray-300 rounded px-3 py-2"
           />
         </div>
@@ -127,6 +159,12 @@ const RoomsDetails = () => {
         >
           Book Now
         </button>
+      </div>
+
+      <div className="mt-6">
+        <Link to="/my-bookings" className="text-blue-600 hover:underline inline-flex items-center gap-2">
+          View My Bookings →
+        </Link>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import image from "../../assets/HeroImage3.jpg";
 
 const AdminSignup = () => {
-    const [isSignUp, setIsSignUp] = useState(false);
+    const [isSignUp, setIsSignUp] = useState(true);
     const [password, setPassword] = useState("");
     const [passwordStrength, setPasswordStrength] = useState("");
     const [email, setEmail] = useState("");
@@ -139,7 +139,7 @@ const AdminSignup = () => {
                         </button>
 
                         <p className="text-gray-500/90 text-sm mt-4">
-                            Don’t have an account?{" "}
+                            Don't have an account?{" "}
                             <button
                                 type="button"
                                 onClick={() => setIsSignUp(true)}
