@@ -1,18 +1,15 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import api from "../api/axios"
 import image from "../assets/HeroImage1.jpg"
 
 const UserSignup = () => {
     const [isSignUp, setIsSignUp] = useState(false)
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-    })
+    const [formData, setFormData] = useState({ email: "", password: "", first_name: "", last_name: "" })
     const [passwordStrength, setPasswordStrength] = useState("")
     const [message, setMessage] = useState("")
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const checkPasswordStrength = (value) => {
         let strength = 0
@@ -22,20 +19,11 @@ const UserSignup = () => {
         if (/[^A-Za-z0-9]/.test(value)) strength++
 
         switch (strength) {
-            case 1:
-                setPasswordStrength("Weak")
-                break
-            case 2:
-                setPasswordStrength("Fair")
-                break
-            case 3:
-                setPasswordStrength("Good")
-                break
-            case 4:
-                setPasswordStrength("Strong")
-                break
-            default:
-                setPasswordStrength("")
+            case 1: setPasswordStrength("Weak"); break
+            case 2: setPasswordStrength("Fair"); break
+            case 3: setPasswordStrength("Good"); break
+            case 4: setPasswordStrength("Strong"); break
+            default: setPasswordStrength("")
         }
     }
 
@@ -53,19 +41,28 @@ const UserSignup = () => {
         try {
             if (isSignUp) {
                 // REGISTER USER
-                await api.post("accounts/register/", formData)
+                await api.post("register/", formData)
                 setMessage("Account created successfully! You can now sign in.")
                 setIsSignUp(false)
             } else {
                 // LOGIN USER
-                const res = await api.post("accounts/login/", {
+                const res = await api.post("login/", {
                     email: formData.email,
                     password: formData.password,
                 })
-                const token = res.data.access
-                localStorage.setItem("token", token)
+
+                const { access, user } = res.data
+                localStorage.setItem("token", access)
+                localStorage.setItem("user", JSON.stringify(user))
+
                 setMessage("Login successful!")
-                console.log("JWT Token:", token)
+
+                // Redirect based on role
+                if (user.isAdmin) {
+                    navigate("/admin")
+                } else {
+                    navigate("/my-bookings")
+                }
             }
         } catch (error) {
             console.error(error.response?.data)
@@ -77,7 +74,6 @@ const UserSignup = () => {
 
     return (
         <div className="flex h-[700px] w-full">
-            {/* Left Side Image */}
             <div
                 className="hidden md:block w-1/2 bg-cover bg-center"
                 style={{
@@ -85,12 +81,8 @@ const UserSignup = () => {
                 }}
             ></div>
 
-            {/* Right Side Form */}
             <div className="w-full md:w-1/2 flex flex-col items-center justify-center px-4">
-                <form
-                    onSubmit={handleSubmit}
-                    className="md:w-96 w-80 flex flex-col items-center justify-center"
-                >
+                <form onSubmit={handleSubmit} className="md:w-96 w-80 flex flex-col items-center justify-center">
                     <h2 className="text-4xl text-gray-900 font-medium">
                         {isSignUp ? "Create Account" : "Sign In"}
                     </h2>
@@ -113,7 +105,7 @@ const UserSignup = () => {
                                 />
                             </div>
 
-                            <div className="flex items-center w-full mt-6 bg-transparent border border-gray-300/60 h-12 rounded-full overflow-hidden pl-6">
+                            <div className="flex items-center w-full mt-4 bg-transparent border border-gray-300/60 h-12 rounded-full overflow-hidden pl-6">
                                 <input
                                     type="text"
                                     name="last_name"
