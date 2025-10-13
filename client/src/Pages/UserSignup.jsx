@@ -4,7 +4,7 @@ import api from "../api/axios"
 import image from "../assets/HeroImage1.jpg"
 
 const UserSignup = () => {
-    const [isSignUp, setIsSignUp] = useState(false)
+    const [isSignUp, setIsSignUp] = useState(true)
     const [formData, setFormData] = useState({ email: "", password: "", first_name: "", last_name: "" })
     const [passwordStrength, setPasswordStrength] = useState("")
     const [message, setMessage] = useState("")
@@ -183,7 +183,7 @@ const UserSignup = () => {
                             </>
                         ) : (
                             <>
-                                Don’t have an account?{" "}
+                                Don't have an account?{" "}
                                 <button
                                     type="button"
                                     onClick={() => setIsSignUp(true)}
