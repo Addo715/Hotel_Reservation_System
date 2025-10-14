@@ -45,13 +45,13 @@ const Hero = () => {
               Plan your perfect getaway with seamless booking and great deals.
             </p>
 
-            <Link to='/signup'>
+            {/* <Link to='/signup'>
               <div className="mt-4 hidden sm:block">
                 <button className="flex items-center gap-2 bg-white text-blue-600 font-semibold border border-blue-600 px-4 py-2 rounded-full hover:bg-red-50 transition cursor-pointer">
                   Book Now <FaArrowRight />
                 </button>
               </div>
-            </Link>
+            </Link> */}
           </div>
 
           {/* FormsField */}
