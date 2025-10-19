@@ -408,13 +408,9 @@ const NewNavbar = () => {
               </Link>
             </li>
             <li>
-              <Link 
-                to="/my-bookings" 
-                className="text-sm hover:text-blue-500 transition cursor-pointer"
-                onClick={() => setMenuOpen(false)}
-              >
-                My Bookings
-              </Link>
+              <Link to="/dashboard" className="hover:text-gray-500/80 transition cursor-pointer">
+              Dashboard
+            </Link>
             </li>
           </ul>
 

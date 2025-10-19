@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { roomsDummyData, facilityIcons } from '../assets/assets';
 import { Link } from 'react-router-dom';
+import FormsField from '../Components/FormsField';
 
 const CheckBox = ({ label, selected, onChange }) => (
   <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
@@ -90,8 +91,16 @@ const AllRooms = () => {
     }, []);
 
   return (
+    <div>
+        {/* Move FormsField into layout & position it nicely
+      <div className="pt-10 px-4 sm:px-8 md:px-16 lg:px-24">
+        <FormsField />
+      </div> */}
     <div className="flex flex-col-reverse lg:flex-row items-start justify-between pt-28 px-4 sm:px-8 md:px-16 lg:px-24">
       {/* Rooms List */}
+
+
+      
       <div className="flex-1 w-full">
         {sortedRooms.length === 0 ? (
           <div className="text-center py-20">
@@ -134,7 +143,7 @@ const AllRooms = () => {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <p className="text-gray-800 font-semibold text-lg">
-                      ${room.pricePerNight} <span className="text-sm text-gray-500">/ night</span>
+                      ₵{room.pricePerNight} <span className="text-sm text-gray-500">/ night</span>
                     </p>
                     <button className="bg-white text-blue-600 font-semibold cursor-pointer border border-blue-600 px-4 py-2 hover:bg-blue-50 transition">
                       Book Now
@@ -200,6 +209,7 @@ const AllRooms = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

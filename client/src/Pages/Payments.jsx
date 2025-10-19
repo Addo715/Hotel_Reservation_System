@@ -171,14 +171,14 @@ const Payments = () => {
   };
 
   return (
-    <div className="px-4 sm:px-8 md:px-16 lg:px-24 pt-28 pb-20">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-24 pt-10 pb-20">
       <Toaster />
       
       {/* Header */}
       <div className="mb-8">
         <button
-          onClick={() => navigate("/my-bookings")}
-          className="text-gray-600 hover:text-gray-800 mb-4 cursor-pointer flex items-center gap-2"
+          onClick={() => navigate("/dashboard")}
+          className="text-blue-500 hover:text-blue-600 mb-4 cursor-pointer flex items-center gap-2"
         >
           ← Back
         </button>
@@ -353,7 +353,7 @@ const Payments = () => {
             onClick={handlePayment}
             className="w-full mt-6 bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
           >
-            Pay ${booking.total}
+            Pay ₵{booking.total}
           </button>
 
           <p className="text-xs text-gray-500 text-center mt-4">
@@ -425,7 +425,7 @@ const Payments = () => {
               <div className="flex justify-between items-center">
                 <span className="font-semibold">Total Amount:</span>
                 <span className="text-2xl font-bold text-blue-600">
-                  ${booking.total}
+                  ₵{booking.total}
                 </span>
               </div>
             </div>

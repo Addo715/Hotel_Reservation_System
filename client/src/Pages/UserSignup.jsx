@@ -510,7 +510,7 @@ const UserSignup = () => {
                     if (user.isAdmin) {
                         navigate("/admin")
                     } else {
-                        navigate("/")
+                        navigate("/rooms")
                     }
                 }, 500)
             }

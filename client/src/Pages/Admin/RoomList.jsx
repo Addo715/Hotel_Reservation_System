@@ -151,7 +151,7 @@ const RoomList = () => {
                                         {room.status.charAt(0).toUpperCase() + room.status.slice(1)}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4 text-sm font-semibold text-gray-800">${parseFloat(room.price_per_night).toFixed(2)}</td>
+                                <td className="px-6 py-4 text-sm font-semibold text-gray-800"> ₵{parseFloat(room.price_per_night).toFixed(2)}</td>
 
                                 {/* Edit */}
                                 <td className="px-6 py-4">
@@ -224,7 +224,7 @@ const RoomList = () => {
                                     onChange={handlePriceChange}
                                     className="border px-3 py-2 rounded w-full"
                                 />
-                                <p className="text-gray-500 text-sm mt-1">Currency: $</p>
+                                <p className="text-gray-500 text-sm mt-1">Currency:  ₵</p>
                             </div>
 
                             <div>

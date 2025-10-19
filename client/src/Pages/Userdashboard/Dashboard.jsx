@@ -80,7 +80,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-4xl font-bold text-green-500 mb-2">
-                $
+                ₵
                 {reservations.reduce((sum, r) => sum + parseFloat(r.amount || 0), 0)}
               </h3>
               <p className="text-gray-600 font-medium">Total Spent</p>

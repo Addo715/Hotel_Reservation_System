@@ -148,7 +148,7 @@ const FeatureRooms = () => {
                   <p className="text-sm text-gray-500">{room.address}</p>
                   <p className="text-md pt-2">{room.roomType}</p>
                   <div className="flex justify-between items-center mt-4">
-                    <p className="text-gray-600">${room.pricePerNight} / night</p>
+                    <p className="text-gray-600"> ₵{room.pricePerNight} / night</p>
                     <Link to={`/rooms/${room._id}`}>
                       <button 
                         onClick={(e) => handleProtectedAction(e, `/rooms/${room._id}`)}

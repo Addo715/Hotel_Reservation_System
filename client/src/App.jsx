@@ -26,7 +26,7 @@ const App = () => {
   const hideFooter =
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/signup") ||
-    location.pathname.startsWith("/my-bookings") ||
+    location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/payment");
 
   return (
@@ -68,7 +68,7 @@ const App = () => {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/signup" element={<UserSignup />} />
           <Route path="/adminsignup" element={<AdminSignup />} />
-          <Route path="/my-bookings" element={<UserDashboardPage />} />
+          <Route path="/dashboard" element={<UserDashboardPage />} />
           <Route path="/payment" element={<Payments/>}/>
         </Routes>
       </main>

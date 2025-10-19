@@ -114,7 +114,7 @@ const RoomsDetails = () => {
       </div>
 
       <div className="mt-6">
-        <p className="text-xl font-semibold">${room.pricePerNight} / night</p>
+        <p className="text-xl font-semibold">₵{room.pricePerNight} / night</p>
         <p className="text-gray-600 text-md mt-2">{room.roomType}</p>
         <div className="mt-4">
           <h2 className="text-lg font-semibold">Amenities</h2>
@@ -162,7 +162,7 @@ const RoomsDetails = () => {
       </div>
 
       <div className="mt-6">
-        <Link to="/my-bookings" className="text-blue-600 hover:underline inline-flex items-center gap-2">
+        <Link to="/dashboard" className="text-blue-600 hover:underline inline-flex items-center gap-2">
           View My Bookings →
         </Link>
       </div>
