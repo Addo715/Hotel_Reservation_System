@@ -3,13 +3,13 @@ import { Users, DollarSign, Home } from "lucide-react";
 
 const Dashboard = () => {
     const [stats, setStats] = useState(null);
+    const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [greeting, setGreeting] = useState("");
     const [localBookings, setLocalBookings] = useState([]);
 
     useEffect(() => {
-        // Greeting logic
         const hour = new Date().getHours();
         if (hour < 12) setGreeting("Good Morning");
         else if (hour < 18) setGreeting("Good Afternoon");
@@ -23,6 +23,7 @@ const Dashboard = () => {
                 const storedUser = JSON.parse(localStorage.getItem("user"));
                 if (storedUser) setUser(storedUser);
 
+<<<<<<< HEAD
                 // Get bookings from localStorage
                 const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
                 setLocalBookings(bookings);
@@ -76,6 +77,19 @@ const Dashboard = () => {
                         revenue_per_room_type: revenuePerRoomType
                     });
                 }
+=======
+                const [statsRes, roomsRes] = await Promise.all([
+                    axios.get("http://127.0.0.1:8000/api/dashboard/admin/", {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get("http://127.0.0.1:8000/api/rooms/rooms/", {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                ]);
+
+                setStats(statsRes.data);
+                setRooms(roomsRes.data.results || roomsRes.data); // handle pagination if any
+>>>>>>> 60cc42f9466eaa474840b4ddf9b0d1f05c6078eb
             } catch (err) {
                 console.error("Error fetching dashboard data:", err);
             } finally {
@@ -124,12 +138,15 @@ const Dashboard = () => {
         return () => clearInterval(interval);
     }, []);
 
+<<<<<<< HEAD
     const getPaymentStatusColor = (status) => {
         return status === "Paid" || status === "paid"
             ? "bg-green-100 text-green-800"
             : "bg-red-100 text-red-800";
     };
 
+=======
+>>>>>>> 60cc42f9466eaa474840b4ddf9b0d1f05c6078eb
     if (loading) {
         return (
             <div className="p-8 text-center text-gray-600 text-lg font-medium">
@@ -146,6 +163,8 @@ const Dashboard = () => {
         );
     }
 
+    const availableRoomsCount = rooms.filter(room => room.status === "available").length;
+
     return (
         <div className="p-8">
             <div className="mb-8">
@@ -155,7 +174,6 @@ const Dashboard = () => {
                 <p className="text-gray-600">Dashboard</p>
             </div>
 
-            {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
@@ -189,9 +207,9 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="text-4xl font-bold text-blue-500 mb-2">
-                                {stats.occupancy_rate}%
+                                {availableRoomsCount}
                             </h3>
-                            <p className="text-gray-600 font-medium">Occupancy Rate</p>
+                            <p className="text-gray-600 font-medium">Available Rooms</p>
                         </div>
                         <div className="bg-teal-50 p-3 rounded-full">
                             <Home className="text-blue-500" size={28} />
@@ -200,7 +218,10 @@ const Dashboard = () => {
                 </div>
             </div>
 
+<<<<<<< HEAD
             {/* All Bookings Table */}
+=======
+>>>>>>> 60cc42f9466eaa474840b4ddf9b0d1f05c6078eb
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="flex items-center justify-between p-6 border-b border-gray-200">
                     <h2 className="text-xl font-bold text-gray-800">All Bookings</h2>
