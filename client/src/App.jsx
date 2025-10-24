@@ -11,6 +11,7 @@ import AdminSignup from './Pages/Admin/AdminSignup';
 import UserDashboardPage from './Pages/Userdashboard/UserDashboardPage';
 import { Toaster } from 'react-hot-toast';
 import NewNavbar from './Components/UserDashboardComponents/NewNavbar';
+import Payments from './Pages/Payments';
 
 const App = () => {
   const location = useLocation();
@@ -18,13 +19,15 @@ const App = () => {
   // Hide Navbar for admin and signup pages
   const hideNavbar =
     location.pathname.startsWith("/admin") ||
-    location.pathname.startsWith("/signup");
+    location.pathname.startsWith("/signup")||
+    location.pathname.startsWith("/payment");
 
   // Hide Footer for admin, signup, and my-bookings pages
   const hideFooter =
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/signup") ||
-    location.pathname.startsWith("/my-bookings");
+    location.pathname.startsWith("/dashboard") ||
+    location.pathname.startsWith("/payment");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -65,7 +68,8 @@ const App = () => {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/signup" element={<UserSignup />} />
           <Route path="/adminsignup" element={<AdminSignup />} />
-          <Route path="/my-bookings" element={<UserDashboardPage />} />
+          <Route path="/dashboard" element={<UserDashboardPage />} />
+          <Route path="/payment" element={<Payments/>}/>
         </Routes>
       </main>
 

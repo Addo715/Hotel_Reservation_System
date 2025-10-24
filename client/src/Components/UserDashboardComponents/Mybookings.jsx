@@ -89,8 +89,8 @@ const MyBookings = () => {
                     </svg>
                     {booking.address}
                   </p>
-                  <p className="text-gray-500 text-sm">Guests: {booking.guests || 1}</p>
-                  <p className="text-gray-700 font-medium mt-1">Total: ${booking.total}</p>
+                  {/* <p className="text-gray-500 text-sm">Guests: {booking.guests || 1}</p> */}
+                  <p className="text-gray-700 font-medium mt-1">Total: ₵{booking.total}</p>
                 </div>
               </div>
 

@@ -37,14 +37,14 @@ const Footer = () => {
             <h2 className="font-semibold mb-5 text-blue-500">Get in touch</h2>
             <div className="text-sm space-y-2">
               <p>+233-555-555-555</p>
-              <p>contact@hotelname.com</p>
+              <p>novastay@gmail.com</p>
             </div>
           </div>
         </div>
       </div>
 
       <p className="pt-4 text-center text-sm pb-5">
-        Copyright {new Date().getFullYear()} © <a>name of hotel</a>. All Right
+        Copyright {new Date().getFullYear()} © <a>NovaStay</a>. All Right
         Reserved.
       </p>
     </footer>
